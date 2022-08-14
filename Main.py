@@ -1,77 +1,130 @@
-class Evaluate:
-  """This class validates and evaluate postfix expression.
-  Attributes:
-      top: An integer which denotes the index of the element at the top of the stack currently.
-      size_of_stack: An integer which represents the size of stack.
-      stack: A List which acts as a Stack.
-  """
+class Solution:
+    """This class implements linear queue.
+      Attributes:
+          stack: A list which maintains the content of stack.
+          queue: A list which maintains the content of queue.
+          top: An integer which denotes the index of the element at the top of the stack.
+          front: An integer which denotes the index of the element at the front of the queue.
+          rear: An integer which denotes the index of the element at the rear of the queue.
+          size: An integer which represents the size of stack and queue.
+      """
+
     # Write your code here
+    def __init__(self, size):
+        """Inits Solution with stack, queue, size, top, front and rear.
+        Arguments:
+          size: An integer to set the size of stack and queue.
+        """
+        self.stack = []
+        self.queue = []
+        self.size = size
+        self.top = -1
+        self.rear = -1
+        self.front = -1
+
+    def is_stack_empty(self):
+        """
+        Check whether the stack is empty.
+        Returns:
+          True if it is empty, else returns False.
+        """
+        if self.top == -1:
+            return 1
+        else:
+            return 0
+        
+        # Write your code here
+
+    def is_queue_empty(self):
+        """
+        Check whether the queue is empty.
+        Returns:
+          True if it is empty, else returns False.
+        """
+        # Write your code here
+        if self.front == -1 or self.front >self.rear:
+            return 1
+        else:
+            return 0
+        
+
+    def is_stack_full(self):
+        """
+        Check whether the stack is full.
+        Returns:
+          True if it is full, else returns False.
+        """
+        # Write your code here
+        if self.top == (self.size -1):
+            return 1
+        else:
+            return 0
+
+    def is_queue_full(self):
+        """
+        Check whether the queue is full.
+        Returns:
+          True if it is full, else returns False.
+        """
+        # Write your code here
+        if self.rear == (self.size - 1):
+            return 1
+        else:
+            return 0
+
+    def push_character(self, character):
+        """
+        Push the character to stack, if stack is not full.
+        Arguments:
+            character: A character that will be pushed to the stack.
+        """
+        # Write your code here
+        if not self.is_stack_full():
+            self.stack.append(character)
+            self.top+=1
+
+    def enqueue_character(self, character):
+        """
+        Enqueue the character to queue, if queue is not full.
+        Arguments:
+            character: A character that will be enqueued to queue.
+        """
+        # Write your code here
+        if not self.is_queue_full():
+            if self.front == -1:
+                self.front = 0
+        self.rear+=1
+        self.queue.append(character)
+            
+
+    def pop_character(self):
+        """
+        Do pop operation if the stack is not empty.
+        Returns:
+          The data that is popped out if the stack is not empty.
+        """
+        # Write your code here
+        if not self.is_stack_empty():
+            self.top-=1
+        return self.stack.pop(self.top + 1)
+            
+    def dequeue_character(self):
+        """
+        Do dequeue operation if the queue is not empty.
+        Returns:
+          The data that is dequeued if the queue is not empty.
+        """
+        # Write your code here
+        if not self.is_queue_empty():
+            self.front +=1
+        return self.queue[self.front - 1]
+            
+            
 
 
-  def __init__(self, size):
-    """Inits Evaluate with top, size_of_stack and stack.
-    Arguments:
-      size_of_stack: An integer to set the size of stack.
-    """
-    self.top = -1
-    self.size_of_stack = size
-    self.stack = []
+# read the string text
+text = input()
 
+# find the length of text
+length_of_text = len(text)
 
-  def isEmpty(self):
-    """
-    Check whether the stack is empty.
-    Returns:
-      True if it is empty, else returns False.
-    """
-      # Write your code here
-
-
-  def pop(self):
-    """
-    Do pop operation if the stack is not empty.
-    Returns:
-      The data which is popped out if the stack is not empty.
-    """
-    # Write your code here
-
-
-  def push(self, operand):
-    """
-    Push the operand to stack if the stack is not full.
-    Arguments:
-      operand: The operand to be pushed.
-    """
-    # Write your code here
-
-
-  def validate_postfix_expression(self, expression):
-    """
-    Check whether the expression is a valid postfix expression.
-    Arguments:
-      expression: A String which represents the expression to be validated.
-    Returns:
-      True if the expression is valid, else returns False.
-    """
-    # Write your code here
-
-
-  def evaluate_postfix_expression(self, expression):
-    """
-    Evaluate the postfix expression
-    Arguments:
-      expression: A String which represents the the expression to be evaluated
-    Returns:
-      The result of evaluated postfix expression.
-    """
-    # Write your code here
-
-
-# Do not change the following code
-postfix_expression = input()  # Read postfix expression
-tokens = postfix_expression.split()
-evaluate = Evaluate(len(tokens))
-if evaluate.validate_postfix_expression(tokens):
-    print(evaluate.evaluate_postfix_expression(tokens))
-else:
-    print('Invalid postfix expression')
